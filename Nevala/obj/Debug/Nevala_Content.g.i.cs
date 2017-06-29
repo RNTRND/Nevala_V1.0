@@ -8,18 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imageeditcopy.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imageeditcut.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imageeditpaste.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imageeditredo.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imageeditundo.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imagefilenew.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imagefileopen.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imagefileprint.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imagefileprintpreview.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imagefilesave.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/imagefilesaveall.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/scide.wpf.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/screenshot.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fodyweavers.xml")]
 
 

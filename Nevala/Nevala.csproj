@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +38,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged.Fody">
+      <HintPath>..\packages\PropertyChanged.Fody.1.52.1\PropertyChanged.Fody.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET FindReplaceDialog">
       <HintPath>..\..\..\ScintillaNET-FindReplaceDialog-master\ScintillaNet FindReplaceDialog\bin\Release\ScintillaNET FindReplaceDialog.dll</HintPath>
@@ -78,10 +83,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Directory\Data\DirectoryItem.cs" />
+    <Compile Include="Directory\Data\DirectoryItemType.cs" />
+    <Compile Include="Directory\DirectoryStructure.cs" />
+    <Compile Include="Directory\ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="Directory\ViewModels\DirectoryItemViewModel.cs" />
+    <Compile Include="Directory\ViewModels\DirectoryStructureViewModel.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="DocumentForm.xaml.cs">
       <DependentUpon>DocumentForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HeaderToImageConverter.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="OpenFileDialog.xaml.cs">
       <DependentUpon>OpenFileDialog.xaml</DependentUpon>
@@ -163,7 +175,23 @@
     <Resource Include="Images\SCide.WPF.png" />
     <Resource Include="Images\Screenshot.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\drive.png" />
+    <Resource Include="Images\file.png" />
+    <Resource Include="Images\folder-closed.png" />
+    <Resource Include="Images\folder-open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.2.1.0\build\netstandard1.0\Fody.targets" Condition="Exists('..\packages\Fody.2.1.0\build\netstandard1.0\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.2.1.0\build\netstandard1.0\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.1.0\build\netstandard1.0\Fody.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

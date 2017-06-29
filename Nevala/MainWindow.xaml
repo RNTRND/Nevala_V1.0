@@ -214,7 +214,33 @@
             </DockPanel>
         </DockPanel>
         <GridSplitter Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Width="5" HorizontalAlignment="Stretch"/>
-        <TextBox Grid.Column="2" Grid.Row="2" Text="File Explorer" ></TextBox>
+        <!--<TextBox Grid.Column="2" Grid.Row="0" Text="{Binding FullPath, Mode=TwoWay}">
+            <TextBox.DataContext>
+                <my:DirectoryItem/>
+            </TextBox.DataContext>
+        </TextBox>-->
+        <StackPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="3">
+            <TreeView x:Name="FolderView" ItemsSource="{Binding Items}">
+                <TreeView.DataContext>
+                    <my:DirectoryStructureViewModel/>
+                </TreeView.DataContext>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20" Margin="3" 
+                                    Source="{Binding Type,
+                                        Converter={x:Static my:HeaderToImageConverter.Instance}}" />
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </StackPanel>
         <GridSplitter Grid.Column="2" Grid.Row ="3" Height="5" HorizontalAlignment="Stretch"/>
         <TextBox Name="Output"
                 Text="Console"

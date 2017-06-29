@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\
+G:\Nevala Scintilla\Nevala\Nevala_WPF\Nevala\obj\Debug\
 Nevala
 none
 false
 DEBUG;TRACE
-G:\Nevala Scintilla\Nevala\Nevala\App.xaml
+G:\Nevala Scintilla\Nevala\Nevala_WPF\Nevala\App.xaml
 4-1235970330
 
-20-1936836105
-22-1424079950
+27-1429497616
+23-621702057
 DocumentForm.xaml;MainWindow.xaml;OpenFileDialog.xaml;SaveFileDialog.xaml;
 
-True
+False
 
