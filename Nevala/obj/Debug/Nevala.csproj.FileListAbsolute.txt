@@ -1,0 +1,57 @@
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\MainWindow.baml
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\OpenFileDialog.baml
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\SaveFileDialog.baml
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\DocumentForm.g.cs
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\MainWindow.g.cs
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\OpenFileDialog.g.cs
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\SaveFileDialog.g.cs
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\App.g.cs
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\GeneratedInternalTypeHelper.g.cs
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\Nevala_MarkupCompile.cache
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\Nevala_MarkupCompile.lref
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\Nevala.exe.config
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\Nevala.exe
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\Nevala.pdb
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\ScintillaNET FindReplaceDialog.dll
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\ScintillaNET.dll
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\ScintillaNET.WPF.dll
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\Xceed.Wpf.AvalonDock.dll
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\ScintillaNET FindReplaceDialog.xml
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\ScintillaNET.xml
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\ScintillaNET.WPF.pdb
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\DocumentForm.baml
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\Nevala.g.resources
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\Nevala.Properties.Resources.resources
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\Nevala.csproj.GenerateResource.Cache
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\Nevala.exe
+G:\Nevala Scintilla\Nevala\Nevala\obj\Debug\Nevala.pdb
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\bin\Debug\Nevala.exe.config
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\Nevala.exe
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\Nevala.pdb
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\bin\Debug\Nevala.exe
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\bin\Debug\Nevala.pdb
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\bin\Debug\ScintillaNET.dll
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\bin\Debug\ScintillaNET FindReplaceDialog.xml
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\bin\Debug\ScintillaNET.xml
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\bin\Debug\ScintillaNET.WPF.pdb
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\Nevala.csprojResolveAssemblyReference.cache
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\OpenFileDialog.baml
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\SaveFileDialog.baml
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\DocumentForm.g.cs
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\MainWindow.g.cs
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\OpenFileDialog.g.cs
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\SaveFileDialog.g.cs
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\App.g.cs
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\Nevala_MarkupCompile.cache
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\Nevala_MarkupCompile.lref
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\DocumentForm.baml
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\MainWindow.baml
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\Nevala.g.resources
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\Nevala.Properties.Resources.resources
+D:\Documents\Projects\Rabbit and Tortoise\Nevala\Nevala\Nevala\obj\Debug\Nevala.csproj.GenerateResource.Cache
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\Microsoft.Expression.Interactions.dll
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\System.Windows.Interactivity.dll
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\Microsoft.Expression.Interactions.xml
+G:\Nevala Scintilla\Nevala\Nevala\bin\Debug\System.Windows.Interactivity.xml

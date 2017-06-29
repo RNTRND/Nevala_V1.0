@@ -1,0 +1,227 @@
+﻿<Window x:Class="Nevala.MainWindow"     
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:my="clr-namespace:Nevala"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:viewmodels="clr-namespace:Nevala.ViewModels"
+        Title="MainWindow" Height="350" Width="558">
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=File.WindowLoaded, Mode=TwoWay}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*" MinWidth="350" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width= "2*" MinWidth="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="1*" MinHeight="50"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="1*" MinHeight="50"/>
+        </Grid.RowDefinitions>
+        <my:OpenFileDialog x:Name="openFileDialog" Filter="All Files (*.*)|*.*" Multiselect="True" />
+
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0"  Grid.ColumnSpan="3">
+            <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" DockPanel.Dock="Top" Grid.Row="0" Grid.ColumnSpan="3">
+                <MenuItem Header="_File">
+                    <MenuItem Name="newMenuItem" Command="{Binding File.NewCommand}" Header="_New">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageFileNew.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="openMenuItem" Command="{Binding File.OpenCommand}" Header="_Open...">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageFileOpen.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="closeMenuItem" Command="{Binding File.CloseCommand}" Header="_Close" />
+                    <MenuItem Name="closeAllMenuItem" Command="{Binding File.CloseAllCommand}" Header="_Close All" />
+                    <Separator />
+                    <MenuItem Name="saveMenuItem" Command="{Binding File.SaveCommand}" Header="_Save">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageFileSave.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="saveAsMenuItem" Command="{Binding File.SaveFileAsCommand}" Header="Save _As..." />
+                    <MenuItem Name="saveAllMenuItem" Command="{Binding File.SaveAllCommand}" Header="Save A_ll">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageFileSaveAll.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="exitMenuItem" Command="{Binding File.ExitCommand}" Header="E_xit" />
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Name="undoMenuItem" Command="{Binding Edit.UndoCommand}" Header="_Undo">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageEditUndo.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="redoMenuItem" Command="{Binding Edit.RedoCommand}" Header="_Redo">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageEditRedo.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="cutMenuItem" Command="{Binding Edit.CutCommand}" Header="_Cut">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageEditCut.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="copyMenuItem" Command="{Binding Edit.CopyCommand}" Header="_Copy">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageEditCopy.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="pasteMenuItem" Command="{Binding Edit.PasteCommand}" Header="_Paste">
+                        <MenuItem.Icon>
+                            <Image Height="16px" Source="/Nevala;component/Images/ImageEditPaste.png" Stretch="Uniform" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Name="SelectLineMenuItem" Command="{Binding Edit.SelectLineCommand}" Header="Select_Line" />
+                    <MenuItem Name="SelectAllMenuItem" Command="{Binding Edit.SelectAllCommand}" Header="Select _All" />
+                    <MenuItem Name="ClearSelection" Command="{Binding Edit.ClearCommand}" Header="Clear Selection" />
+                    <Separator />
+                    <MenuItem Header="_Find and Replace">
+                        <MenuItem Name="IncrementalSearchMenuItem" Command="{Binding Edit.incrementalSearchCommand}" Header="_Incremental Search" />
+                        <MenuItem Name="FindMenuItem" Command="{Binding Edit.FindCommand}" Header="_Find" />
+                        <MenuItem Name="ReplaceMenuItem" Command="{Binding Edit.ReplaceCommand}" Header="_Replace" />
+                        <MenuItem Name="FindInFilesMenuItem" Command="{Binding Edit.FindInFilesCommand}" Header="_Find in Files" />
+                        <MenuItem Name="ReplaceInFilesMenuItem" Command="{Binding Edit.ReplaceInFilesCommand}" Header="_Replace in Files" />
+                    </MenuItem>
+                    <MenuItem Name="Go_toMenuItem" Command="{Binding Edit.Go_toCommand}" Header="_Go To" />
+                    <Separator />
+                    <MenuItem Header="_Bookmarks">
+                        <MenuItem Name="ToggleBookmarkMenuItem" Command="{Binding Edit.ToggleBookmark}" Header="_Toggle Bookmark" />
+                        <MenuItem Name="PreviousBookmarkMenuItem" Command="{Binding Edit.PreviousBookmark}" Header="_Previous Bookmark" />
+                        <MenuItem Name="NextBookmarkMenuItem" Command="{Binding Edit.NextBookmark}" Header="Next _Bookmark" />
+                        <MenuItem Name="ClearBookmarksMenuItem" Command="{Binding Edit.ClearBookmarks}" Header="_Clear Bookmarks" />
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Advanced">
+                        <MenuItem Name="MakeUpperCaseMenuItem"  Command="{Binding Edit.MakeUpperCaseCommand}" Header="_Make Upper Case" />
+                        <MenuItem Name="MakeLowerCaseMenuItem"  Command="{Binding Edit.MakeLowerCaseCommand}" Header="_Make Lower Case" />
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_View">
+                    <MenuItem Name="zoomIn" Command="{Binding View.ZooomInCommand}" Header="Zoom In" />
+                    <MenuItem Name="zoomOut" Command="{Binding View.ZoomOutCommand}" Header="Zoom Out" />
+                    <MenuItem Name="lineNumbersMenuItem" Command="{Binding View.LineNumbersCommand}" Header="Line Numbers" />
+                    <MenuItem Name="wordWrapMenuItem" Command="{Binding View.WordWrapCommand}" Header="Word Wrap" />
+                    <MenuItem Name="fold" Command="{Binding View.FoldCommand}" Header="Fold" />
+                    <MenuItem Name="unfold" Command="{Binding View.UnFoldCommand}" Header="Unfold" />
+                    <MenuItem Name="foldAll" Command="{Binding View.FoldAllCommand}" Header="Fold All" />
+                    <MenuItem Name="unfoldAll" Command="{Binding View.UnFoldAllCommand}" Header="Unfold All" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3">
+            <ToolBarPanel Name="toolStrip" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
+                <ToolBarTray Grid.Row="1" Grid.ColumnSpan="3">
+                    <ToolBar Height="25px" ToolBarTray.IsLocked="True">
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                ToolTip="New File (Ctrl+N)" Command="{Binding File.NewCommand}">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageFileNew.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                 ToolTip="Open File (Ctrl+O)" Command="{Binding File.OpenCommand}">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageFileOpen.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                 ToolTip="Save File (Ctrl+S)" Command="{Binding File.SaveCommand}">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageFileSave.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                ToolTip="Save All Files (Ctrl+Shift+S)" Command="{Binding File.SaveAllCommand}">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageFileSaveAll.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Separator />
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                ToolTip="Cut (Ctrl+X)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageEditCut.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                 ToolTip="Copy (Ctrl+C)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageEditCopy.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                 ToolTip="Paste (Ctrl+V)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageEditPaste.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Separator />
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                 ToolTip="Undo (Ctrl+Z)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageEditUndo.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                        <Button Width="23px" Height="22px" Padding="0px"
+                                 ToolTip="Redo (Ctrl+Y)">
+                            <StackPanel>
+                                <Image Height="16px" Source="/Nevala;component/Images/ImageEditRedo.png" Stretch="Uniform" />
+                            </StackPanel>
+                        </Button>
+                    </ToolBar>
+                </ToolBarTray>
+            </ToolBarPanel>
+        </DockPanel>
+
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"  Grid.RowSpan="3" Grid.ColumnSpan="1">
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
+                <!--<StatusBar Name="statusStrip" Height="22px" HorizontalAlignment="Stretch"
+                           DockPanel.Dock="Bottom">
+                    <StatusBarItem />
+                </StatusBar>-->
+                <ad:DockingManager Name="dockPanel" Grid.Row="3" Grid.Column="0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="ActiveContentChanged">
+                            <i:InvokeCommandAction Command="{Binding Path=File.DockPanelContentChanged, Mode=TwoWay}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ad:DockingManager.Theme>
+                        <ad:GenericTheme />
+                    </ad:DockingManager.Theme>
+                    <ad:LayoutRoot >
+                        <ad:LayoutPanel>
+                            <ad:LayoutDocumentPane x:Name="documentsRoot" IsMaximized="True" />
+                        </ad:LayoutPanel>
+                    </ad:LayoutRoot>
+                </ad:DockingManager>
+            </DockPanel>
+        </DockPanel>
+        <GridSplitter Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Width="5" HorizontalAlignment="Stretch"/>
+        <TextBox Grid.Column="2" Grid.Row="2" Text="File Explorer" ></TextBox>
+        <GridSplitter Grid.Column="2" Grid.Row ="3" Height="5" HorizontalAlignment="Stretch"/>
+        <TextBox Name="Output"
+                Text="Console"
+                Grid.Column="3"
+                Grid.Row="4"
+                AcceptsReturn="True"
+			    AcceptsTab="True"
+                TextWrapping="Wrap"/>
+    </Grid>
+</Window>
