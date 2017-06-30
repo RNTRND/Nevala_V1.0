@@ -109,23 +109,13 @@ namespace Nevala
         #region Close All
         private void CloseAllFiles()
         {
-
-            try
+            if (Document.Documents.Count() >= 1)
             {
-                foreach (DocumentForm doc in Document.Documents)
-                    //((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Remove(doc);
-                   OnClose(doc);
+                OnClose(Document.ActiveDocument);
+                CloseAllFiles();
             }
-            catch
-            {
-                if (Document.Documents.Count() == 1)
-                    CloseFile();
-                else if (Document.Documents.Count() > 1)
-                    CloseAllFiles();
-                else
-                    NewFile();
-            }
-
+            else
+                NewFile();
         }
         #endregion //Close All
 
@@ -136,7 +126,7 @@ namespace Nevala
             if (doc.Scintilla.Modified)
             {
                 // Prompt if not saved
-                string message = String.Format(CultureInfo.CurrentCulture, "The _text in the {0} file has changed.{1}{2}Do you want to save the changes?", ((MainWindow)System.Windows.Application.Current.MainWindow).Title.TrimEnd(' ', '*'), Environment.NewLine, Environment.NewLine);
+                string message = String.Format(CultureInfo.CurrentCulture, "The Text in the {0} file has changed.{1}{2}Do you want to save the changes?", ((MainWindow)System.Windows.Application.Current.MainWindow).Title.TrimEnd(' ', '*'), Environment.NewLine, Environment.NewLine);
 
                 MessageBoxResult dr = MessageBox.Show(message, Program.Title, MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation);
                 if (dr == MessageBoxResult.Cancel)
