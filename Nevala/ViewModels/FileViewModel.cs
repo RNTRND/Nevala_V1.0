@@ -109,18 +109,15 @@ namespace Nevala
         #region Close All
         private void CloseAllFiles()
         {
-            if (Document.Documents.Count() >= 1)
-            {
-                OnClose(Document.ActiveDocument);
+            if (Document.Documents.Count() >= 1 && OnClose(Document.ActiveDocument))
                 CloseAllFiles();
-            }
-            else
+            else if (Document.Documents.Count() == 0)
                 NewFile();
         }
         #endregion //Close All
 
         #region On Close
-        public void OnClose(DocumentForm doc)
+        private bool OnClose(DocumentForm doc)
         {
             CancelEventArgs e = new CancelEventArgs();
             if (doc.Scintilla.Modified)
@@ -129,20 +126,24 @@ namespace Nevala
                 string message = String.Format(CultureInfo.CurrentCulture, "The Text in the {0} file has changed.{1}{2}Do you want to save the changes?", ((MainWindow)System.Windows.Application.Current.MainWindow).Title.TrimEnd(' ', '*'), Environment.NewLine, Environment.NewLine);
 
                 MessageBoxResult dr = MessageBox.Show(message, Program.Title, MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation);
-                if (dr == MessageBoxResult.Cancel)
+                if (dr == MessageBoxResult.No)
                 {
                     // Stop closing
-                    e.Cancel = true;
-                    return;
+                    //e.Cancel = true;
+                    ((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Remove(doc);
+                    return true;
                 }
                 else if (dr == MessageBoxResult.Yes)
                 {
                     // Try to save before closing
                     e.Cancel = !doc.Save();
-                    return;
+                    return true;
                 }
+                else if(dr == MessageBoxResult.Cancel)
+                { return false; }
             }
             ((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Remove(doc);
+            return true;
         }
         #endregion //On Close
 
