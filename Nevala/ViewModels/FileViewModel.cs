@@ -33,7 +33,6 @@ namespace Nevala
         #region Private Properties
         private Document Document { get; set; }
         private Init init { get; set; }
-        public object MyFindReplace { get; private set; }
         #endregion //Private Properties
 
         #region Constructor
@@ -53,6 +52,8 @@ namespace Nevala
             DockPanelContentChanged = new RelayCommand(DockPanelActiveContentChanged);
             WindowLoaded = new RelayCommand(OnWindowLoaded);
             //CheckIsNull = new RelayCommand(IfNull);
+
+            init = new Init(Document);
         }
     
         #endregion
@@ -68,7 +69,7 @@ namespace Nevala
         #region Open
         private void OpenFile()
         {
-            init = new Init(Document);
+            
             init.OpenFile();
         }
         #endregion //Open
@@ -179,9 +180,9 @@ namespace Nevala
         {
             if (Document.ActiveDocument != null)
             {
-                ((MainWindow)System.Windows.Application.Current.MainWindow).Title = String.Format(CultureInfo.CurrentCulture, "{0} - {1}", Document.ActiveDocument.Title, Program.Title);  
-                //MyFindReplace.Scintilla = Document.ActiveDocument.Scintilla.Scintilla;
-                //Document.ActiveDocument.FindReplace = MyFindReplace;
+                ((MainWindow)System.Windows.Application.Current.MainWindow).Title = String.Format(CultureInfo.CurrentCulture, "{0} - {1}", Document.ActiveDocument.Title, Program.Title);
+                init.MyFindReplace.Scintilla = Document.ActiveDocument.Scintilla.Scintilla;
+                Document.ActiveDocument.FindReplace = init.MyFindReplace;
             }
             else
                 ((MainWindow)System.Windows.Application.Current.MainWindow).Title = Program.Title;

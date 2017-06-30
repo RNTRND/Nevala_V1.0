@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
@@ -59,16 +60,31 @@ namespace Nevala
 
         #endregion
 
+        #region Private Properties
+        /// <summary>
+        /// Local object of the Document
+        /// </summary>
+        private Document Document { get; set; }
+        
+        /// <summary>
+        ///Object of Init 
+        /// </summary>
+        private Init init { get; set; }
+        #endregion
+
         #region Public Commands
 
         /// <summary>
         /// The command to expand this item
         /// </summary>
         public ICommand ExpandCommand { get; set; }
-
+        /// <summary>
+        /// Open on Click
+        /// </summary>
+        public ICommand OpenOnClick { get; set; }
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Default constructor
@@ -79,13 +95,18 @@ namespace Nevala
         {
             // Create commands
             this.ExpandCommand = new RelayCommand(Expand);
-
+            this.OpenOnClick = new RelayCommand(OpenFile);
             // Set path and type
             this.FullPath = fullPath;
             this.Type = type;
 
             // Setup the children as needed
             this.ClearChildren();
+        }
+
+        public DirectoryItemViewModel(Document document)
+        {
+            Document = document;
         }
 
         #endregion
@@ -120,6 +141,12 @@ namespace Nevala
             var children = DirectoryStructure.GetDirectoryContents(this.FullPath);
             this.Children = new ObservableCollection<DirectoryItemViewModel>(
                                 children.Select(content => new DirectoryItemViewModel(content.FullPath, content.Type)));
+        }
+
+        private void OpenFile()
+        {
+            init = new Init(Document);
+            init.OpenFile(this.FullPath);
         }
     }
 }

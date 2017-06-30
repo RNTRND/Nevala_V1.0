@@ -18,6 +18,7 @@ namespace Nevala
         public ICommand IncrementalSearchCommand { get; set; }
         public ICommand FindCommand { get; set; }
         public ICommand ReplaceCommand { get; set; }
+        public ICommand GoToCommand { get; set; }
         public ICommand ToggleBookmarkCommand { get; set; }
         public ICommand PreviousBookmarkCommand { get;  set; }
         public ICommand NextBookmarkCommand { get;  set; }
@@ -47,6 +48,7 @@ namespace Nevala
             IncrementalSearchCommand = new RelayCommand(IncrementalSearch);
             FindCommand = new RelayCommand(Find);
             ReplaceCommand = new RelayCommand(Replace);
+            GoToCommand = new RelayCommand(Go_to);
             ToggleBookmarkCommand = new RelayCommand(ToggleBookmark);
             PreviousBookmarkCommand = new RelayCommand(PreviousBookmark);
             NextBookmarkCommand = new RelayCommand(NextBookmark);
@@ -133,16 +135,19 @@ namespace Nevala
 
         private void IncrementalSearch()
         {
+            
             Document.ActiveDocument.FindReplace.ShowIncrementalSearch();
         }
 
         private void Find()
         {
+            
             Document.ActiveDocument.FindReplace.ShowFind();
         }
 
         private void Replace()
         {
+           
             Document.ActiveDocument.FindReplace.ShowReplace();
         }
         #endregion Find and Replace

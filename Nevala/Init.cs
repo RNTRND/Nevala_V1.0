@@ -58,7 +58,7 @@ namespace Nevala
         
         private const string ProductName = "Nevala";
         private Document Document { get; set; }
-        private FindReplace MyFindReplace;
+        public FindReplace MyFindReplace;
        
         #endregion Fields
 
@@ -66,8 +66,7 @@ namespace Nevala
         public Init(Document document)
         {
             Document = document;
-            //Call Find Replace or find an alternative
-           // NewDocument();
+            MyFindReplace = new FindReplace();
         }
         #endregion
 
@@ -252,8 +251,8 @@ namespace Nevala
                     OpenFile(filePath);
             }
         }
-
-        private DocumentForm OpenFile(string filePath)
+        
+        public DocumentForm OpenFile(string filePath)
         {
             DocumentForm doc = new DocumentForm();
             doc.Scintilla.Text = File.ReadAllText(filePath);

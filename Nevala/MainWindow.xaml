@@ -16,9 +16,9 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*" MinWidth="350" />
+            <ColumnDefinition Width="6*" MinWidth="350" />
             <ColumnDefinition Width="5" />
-            <ColumnDefinition Width= "2*" MinWidth="100"/>
+            <ColumnDefinition Width= "4*" MinWidth="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="18"/>
@@ -98,10 +98,9 @@
                         <MenuItem Name="IncrementalSearchMenuItem" Command="{Binding Edit.incrementalSearchCommand}" Header="_Incremental Search" />
                         <MenuItem Name="FindMenuItem" Command="{Binding Edit.FindCommand}" Header="_Find" />
                         <MenuItem Name="ReplaceMenuItem" Command="{Binding Edit.ReplaceCommand}" Header="_Replace" />
-                        <MenuItem Name="FindInFilesMenuItem" Command="{Binding Edit.FindInFilesCommand}" Header="_Find in Files" />
                         <MenuItem Name="ReplaceInFilesMenuItem" Command="{Binding Edit.ReplaceInFilesCommand}" Header="_Replace in Files" />
                     </MenuItem>
-                    <MenuItem Name="Go_toMenuItem" Command="{Binding Edit.Go_toCommand}" Header="_Go To" />
+                    <MenuItem Name="Go_toMenuItem" Command="{Binding Edit.GoToCommand}" Header="_Go To" />
                     <Separator />
                     <MenuItem Header="_Bookmarks">
                         <MenuItem Name="ToggleBookmarkMenuItem" Command="{Binding Edit.ToggleBookmark}" Header="_Toggle Bookmark" />
@@ -124,6 +123,21 @@
                     <MenuItem Name="unfold" Command="{Binding View.UnFoldCommand}" Header="Unfold" />
                     <MenuItem Name="foldAll" Command="{Binding View.FoldAllCommand}" Header="Fold All" />
                     <MenuItem Name="unfoldAll" Command="{Binding View.UnFoldAllCommand}" Header="Unfold All" />
+                </MenuItem>
+                <MenuItem Header="_Settings">
+                    <MenuItem Name="Preferences"  Header="Preferences"/>
+                    <MenuItem Name="Font" Header="Font"/>
+                    <MenuItem Name="Import" Header="Import"/>
+                    <MenuItem Name="ShortcutWrapper" Header="Shortcut Wrapper"/>
+                </MenuItem>
+                <MenuItem Header="_Run">
+                    <MenuItem Name="Run" Header="Run"/>
+                    <MenuItem Name="SendviaOutlook" Header="Send via Outlook"/>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Name="PowerHelp" Header="Power Help"/>
+                    <MenuItem Name="About" Header="About"/>
+                    <MenuItem Name="BahubaliHelp" Header="Bahubali Help"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -157,36 +171,41 @@
                         </Button>
                         <Separator />
                         <Button Width="23px" Height="22px" Padding="0px"
-                                ToolTip="Cut (Ctrl+X)">
+                                ToolTip="Cut (Ctrl+X)" Command="{Binding Edit.CutCommand}">
                             <StackPanel>
                                 <Image Height="16px" Source="/Nevala;component/Images/ImageEditCut.png" Stretch="Uniform" />
                             </StackPanel>
                         </Button>
                         <Button Width="23px" Height="22px" Padding="0px"
-                                 ToolTip="Copy (Ctrl+C)">
+                                 ToolTip="Copy (Ctrl+C)" Command="{Binding Edit.CopyCommand}">
                             <StackPanel>
                                 <Image Height="16px" Source="/Nevala;component/Images/ImageEditCopy.png" Stretch="Uniform" />
                             </StackPanel>
                         </Button>
                         <Button Width="23px" Height="22px" Padding="0px"
-                                 ToolTip="Paste (Ctrl+V)">
+                                 ToolTip="Paste (Ctrl+V)" Command="{Binding Edit.PasteCommand}">
                             <StackPanel>
                                 <Image Height="16px" Source="/Nevala;component/Images/ImageEditPaste.png" Stretch="Uniform" />
                             </StackPanel>
                         </Button>
                         <Separator />
                         <Button Width="23px" Height="22px" Padding="0px"
-                                 ToolTip="Undo (Ctrl+Z)">
+                                 ToolTip="Undo (Ctrl+Z)" Command="{Binding Edit.UndoCommand}">
                             <StackPanel>
                                 <Image Height="16px" Source="/Nevala;component/Images/ImageEditUndo.png" Stretch="Uniform" />
                             </StackPanel>
                         </Button>
                         <Button Width="23px" Height="22px" Padding="0px"
-                                 ToolTip="Redo (Ctrl+Y)">
+                                 ToolTip="Redo (Ctrl+Y)" Command="{Binding Edit.RedoCommand}">
                             <StackPanel>
                                 <Image Height="16px" Source="/Nevala;component/Images/ImageEditRedo.png" Stretch="Uniform" />
                             </StackPanel>
                         </Button>
+                        <!--<TextBox Text="{Binding FullPath}" Margin="0,0,0,0.2" Width="217">
+                            <TextBox.DataContext>
+                                <my:DirectoryItem/>
+                            </TextBox.DataContext>
+                        </TextBox>-->
                     </ToolBar>
                 </ToolBarTray>
             </ToolBarPanel>
@@ -221,35 +240,64 @@
                 <my:DirectoryItem/>
             </TextBox.DataContext>
         </TextBox>-->
-        <StackPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="3" CanVerticallyScroll="True">
-            <TreeView x:Name="FolderView" ItemsSource="{Binding Items}">
-                <TreeView.DataContext>
-                    <my:DirectoryStructureViewModel/>
-                </TreeView.DataContext>
-                <TreeView.ItemContainerStyle>
-                    <Style TargetType="{x:Type TreeViewItem}">
-                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                    </Style>
-                </TreeView.ItemContainerStyle>
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="20" Margin="3" 
-                                    Source="{Binding Type,
-                                        Converter={x:Static my:HeaderToImageConverter.Instance}}" />
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </StackPanel>
+        <TabControl Grid.Column="2" Grid.Row="2" TabStripPlacement="Bottom">
+            <TabItem Header="File Explorer">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Grid.Column="2" Grid.Row="2" Grid.RowSpan="3">
+                        <TreeView x:Name="FolderView" ItemsSource="{Binding Items}">
+                            <TreeView.DataContext>
+                                <my:DirectoryStructureViewModel/>
+                            </TreeView.DataContext>
+                            <TreeView.ItemContainerStyle>
+                                <Style TargetType="{x:Type TreeViewItem}">
+                                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                                </Style>
+                            </TreeView.ItemContainerStyle>
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="20" Margin="3" 
+                                            Source="{Binding Type,
+                                                Converter={x:Static my:HeaderToImageConverter.Instance}}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Name}" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                <i:InvokeCommandAction Command="{Binding Path=OpenOnClick, Mode=TwoWay}"/>
+                                             </i:EventTrigger>
+                                         </i:Interaction.Triggers>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Variable Explorer">
+
+            </TabItem>
+        </TabControl>
         <GridSplitter Grid.Column="2" Grid.Row ="3" Height="5" HorizontalAlignment="Stretch"/>
-        <TextBox Name="Output"
+        <TabControl Grid.Column="3" Grid.Row="4" TabStripPlacement="Bottom" >
+            <TabItem Header="Python" >
+                <WindowsFormsHost x:Name="host" Grid.Column="3"></WindowsFormsHost>
+                <!--<TextBox Name="Output"
+                Text="Console"
+                Grid.Column="3"
+                Grid.Row="4"
+                AcceptsReturn="True"
+			    AcceptsTab="True"
+                TextWrapping="Wrap"/>-->
+            </TabItem>
+            <TabItem Header="IPython">
+                <TextBox Name="IOutput"
                 Text="Console"
                 Grid.Column="3"
                 Grid.Row="4"
                 AcceptsReturn="True"
 			    AcceptsTab="True"
                 TextWrapping="Wrap"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
