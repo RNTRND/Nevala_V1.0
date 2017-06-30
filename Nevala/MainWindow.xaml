@@ -43,9 +43,6 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Name="closeMenuItem" Command="{Binding File.CloseCommand}" Header="_Close" />
-                    <MenuItem Name="closeAllMenuItem" Command="{Binding File.CloseAllCommand}" Header="_Close All" />
-                    <Separator />
                     <MenuItem Name="saveMenuItem" Command="{Binding File.SaveCommand}" Header="_Save">
                         <MenuItem.Icon>
                             <Image Height="16px" Source="/Nevala;component/Images/ImageFileSave.png" Stretch="Uniform" />
@@ -58,6 +55,11 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
+                    <MenuItem Name="closeMenuItem" Command="{Binding File.CloseCommand}" Header="_Close" />
+                    <MenuItem Name="closeAllMenuItem" Command="{Binding File.CloseAllCommand}" Header="_Close All" />
+                    <Separator />
+                    <MenuItem Name="printMenuItem" Command="{Binding File.PrintCommand}" Header="_Print File"/>
+                    <Separator/>
                     <MenuItem Name="exitMenuItem" Command="{Binding File.ExitCommand}" Header="E_xit" />
                 </MenuItem>
                 <MenuItem Header="_Edit">
@@ -219,7 +221,7 @@
                 <my:DirectoryItem/>
             </TextBox.DataContext>
         </TextBox>-->
-        <StackPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="3">
+        <StackPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="3" CanVerticallyScroll="True">
             <TreeView x:Name="FolderView" ItemsSource="{Binding Items}">
                 <TreeView.DataContext>
                     <my:DirectoryStructureViewModel/>

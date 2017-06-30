@@ -5,6 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Nevala
@@ -20,6 +23,7 @@ namespace Nevala
         public ICommand SaveAllCommand { get; set; } 
         public ICommand CloseCommand { get; set; }
         public ICommand CloseAllCommand { get; set; }
+        public ICommand PrintCommand { get; set; }
         public ICommand ExitCommand { get; set; }
         public ICommand DockPanelContentChanged { get; set; }
         public ICommand WindowLoaded { get; set; }
@@ -41,14 +45,15 @@ namespace Nevala
             SaveCommand = new RelayCommand(SaveFile);
             SaveFileAsCommand = new RelayCommand(SaveFileAs);
             SaveAllCommand = new RelayCommand(SaveAllFiles);
-            CloseCommand = new RelayCommand(CloseFile);
+            CloseCommand = new RelayCommand(OnClose);
             CloseAllCommand = new RelayCommand(CloseAllFiles);
+            PrintCommand = new RelayCommand(PrintFile);
             ExitCommand = new RelayCommand(ExitApplication);
             DockPanelContentChanged = new RelayCommand(DockPanelActiveContentChanged);
             WindowLoaded = new RelayCommand(OnWindowLoaded);
             //CheckIsNull = new RelayCommand(IfNull);
         }
-
+    
         #endregion
 
         #region New 
@@ -106,7 +111,8 @@ namespace Nevala
             try
             {
                 foreach (DocumentForm doc in Document.Documents)
-                    ((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Remove(doc);
+                    //((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Remove(doc);
+                    OnClose();
             }
             catch
             {
@@ -120,6 +126,52 @@ namespace Nevala
                      
         }
         #endregion //Close All
+
+        #region On Close
+        public void OnClose()
+        {
+            if (Document.ActiveDocument.Scintilla.Modified)
+            {
+                // Prompt if not saved
+                string message = String.Format(CultureInfo.CurrentCulture, "The _text in the {0} file has changed.{1}{2}Do you want to save the changes?", ((MainWindow)System.Windows.Application.Current.MainWindow).Title.TrimEnd(' ', '*'), Environment.NewLine, Environment.NewLine);
+
+                MessageBoxResult dr = MessageBox.Show(message, Program.Title, MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation);
+                if (dr == MessageBoxResult.No)
+                {
+                    // Stop closing
+                    CloseFile();
+                    return;
+                }
+                else if (dr == MessageBoxResult.Yes)
+                {
+                    // Try to save before closing
+                    SaveFile();
+                    return;
+                }
+            }
+            CloseFile();
+        }
+        #endregion //On Close
+
+        #region Print 
+
+        private void PrintFile()
+        {
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.UserPageRangeEnabled = true;
+            printDialog.SelectedPagesEnabled = true;
+            printDialog.CurrentPageEnabled = true;
+            printDialog.SelectedPagesEnabled = true;
+
+            if (printDialog.ShowDialog() == true)
+            {
+                FlowDocument doc = new FlowDocument(new Paragraph(new Run(Document.ActiveDocument.Scintilla.Text)));
+                IDocumentPaginatorSource idpSource = doc;
+                printDialog.PrintDocument(idpSource.DocumentPaginator, "Printing...");
+            }
+        }
+
+        #endregion //Print
 
         #region Exit
         private void ExitApplication()

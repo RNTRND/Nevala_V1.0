@@ -84,7 +84,7 @@ namespace Nevala
             }
         }
 
-        private void DocumentForm_Closing(object sender, CancelEventArgs e)
+        public void DocumentForm_Closing(object sender, CancelEventArgs e)
         {
             if (Scintilla.Modified)
             {
