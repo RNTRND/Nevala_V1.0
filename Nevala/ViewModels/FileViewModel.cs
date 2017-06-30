@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace Nevala
             SaveCommand = new RelayCommand(SaveFile);
             SaveFileAsCommand = new RelayCommand(SaveFileAs);
             SaveAllCommand = new RelayCommand(SaveAllFiles);
-            CloseCommand = new RelayCommand(OnClose);
+            CloseCommand = new RelayCommand(CloseFile);
             CloseAllCommand = new RelayCommand(CloseAllFiles);
             PrintCommand = new RelayCommand(PrintFile);
             ExitCommand = new RelayCommand(ExitApplication);
@@ -99,7 +100,7 @@ namespace Nevala
         #region Close
         private void CloseFile()
         {
-            ((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Remove(Document.ActiveDocument);
+            OnClose(Document.ActiveDocument);
             if (((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Count() == 0)
                 NewFile();
         }
@@ -107,12 +108,13 @@ namespace Nevala
 
         #region Close All
         private void CloseAllFiles()
-        {      
+        {
+
             try
             {
                 foreach (DocumentForm doc in Document.Documents)
                     //((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Remove(doc);
-                    OnClose();
+                   OnClose(doc);
             }
             catch
             {
@@ -123,33 +125,34 @@ namespace Nevala
                 else
                     NewFile();
             }
-                     
+
         }
         #endregion //Close All
 
         #region On Close
-        public void OnClose()
+        public void OnClose(DocumentForm doc)
         {
-            if (Document.ActiveDocument.Scintilla.Modified)
+            CancelEventArgs e = new CancelEventArgs();
+            if (doc.Scintilla.Modified)
             {
                 // Prompt if not saved
                 string message = String.Format(CultureInfo.CurrentCulture, "The _text in the {0} file has changed.{1}{2}Do you want to save the changes?", ((MainWindow)System.Windows.Application.Current.MainWindow).Title.TrimEnd(' ', '*'), Environment.NewLine, Environment.NewLine);
 
                 MessageBoxResult dr = MessageBox.Show(message, Program.Title, MessageBoxButton.YesNoCancel, MessageBoxImage.Exclamation);
-                if (dr == MessageBoxResult.No)
+                if (dr == MessageBoxResult.Cancel)
                 {
                     // Stop closing
-                    CloseFile();
+                    e.Cancel = true;
                     return;
                 }
                 else if (dr == MessageBoxResult.Yes)
                 {
                     // Try to save before closing
-                    SaveFile();
+                    e.Cancel = !doc.Save();
                     return;
                 }
             }
-            CloseFile();
+            ((MainWindow)System.Windows.Application.Current.MainWindow).documentsRoot.Children.Remove(doc);
         }
         #endregion //On Close
 
